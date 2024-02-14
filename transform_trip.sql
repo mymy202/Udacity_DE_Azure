@@ -11,14 +11,17 @@ CREATE EXTERNAL TABLE [dbo].[dim_trip] WITH
 )
 AS
 SELECT 
-    [trip_id] ,
-	[rideable_type] ,
-	[start_at] ,
-	[ended_at] ,
-	[start_station_id] ,
-	[end_station_id] ,
-	[rider_id] 
-FROM [dbo].[trip_ex];
+    	tr.[trip_id],
+	tr.[rideable_type],
+	tr.[start_at],
+	tr.[ended_at],
+	tr.[start_station_id],
+	tr.[end_station_id],
+	tr.[rider_id],
+	DATEDIFF(hour, tr.start_at, tr.ended_at) AS duration,
+    	DATEDIFF(year, ri.birthday, tr.start_at) AS rider_age	
+FROM [dbo].[trip_ex] as tr;
+JOIN [dbo].[rider_ex]  as ri ON ri.rider_id = tr.rider_id;
 
 -- Verify the output
 SELECT TOP 10 * FROM dbo.dim_trip;
