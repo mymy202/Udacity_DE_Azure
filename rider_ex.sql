@@ -15,14 +15,14 @@ IF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'file_haoptm
 GO
 
 CREATE EXTERNAL TABLE dbo.rider_ex (
-	[rider_id] nvarchar(4000)
-    ,[firstName] varchar(50)
-    ,[lastName] varchar(50)
-    ,[_address] nvarchar(4000)
-    ,[birthday] varchar(50)
-    ,[account_start_date] nvarchar(4000)
-    ,[account_end_date] nvarchar(4000)
-    ,[is_member] bigint
+	[rider_id] bigint,
+	[firstName] nvarchar(4000),
+	[lastName] nvarchar(4000),
+	[_address] nvarchar(4000),
+	[birthday] datetime2(0),
+	[account_start_date] datetime2(0),
+	[account_end_date] datetime2(0),
+	[is_member] bit
 	)
 	WITH (
 	LOCATION = 'rider.csv',
