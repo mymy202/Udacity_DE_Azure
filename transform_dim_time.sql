@@ -18,8 +18,8 @@ ALTER TABLE dbo.dim_time add CONSTRAINT PK_dim_time_time_id PRIMARY KEY NONCLUST
 
 DECLARE @StartDate DATETIME
 DECLARE @EndDate DATETIME
-SET @StartDate = (SELECT MIN(TRY_CONVERT(datetime, left(start_at, 19))) FROM staging_trip)
-SET @EndDate = DATEADD(year, 5, (SELECT MAX(TRY_CONVERT(datetime, left(start_at, 19))) FROM staging_trip))
+SET @StartDate = (SELECT MIN(TRY_CONVERT(datetime, left(start_at, 19))) FROM trip_ex)
+SET @EndDate = DATEADD(year, 5, (SELECT MAX(TRY_CONVERT(datetime, left(start_at, 19))) FROM trip_ex))
 
 WHILE @StartDate <= @EndDate
     BEGIN
