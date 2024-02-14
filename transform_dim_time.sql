@@ -4,22 +4,27 @@ BEGIN
     DROP EXTERNAL TABLE dbo.dim_time;
 END
 
--- Create dim_time table
-CREATE EXTERNAL TABLE dim_time (
-	[date] [varchar](50)  NULL,
-    	[day_of_the_week] int,
-    	[day_of_the_month] int,
-	[quarter] int,
-	[month] int,
-	[year] int);
-
--- Add constraint
-ALTER TABLE dbo.dim_time add CONSTRAINT PK_dim_time_time_id PRIMARY KEY NONCLUSTERED (time_id) NOT ENFORCED;
-
 DECLARE @StartDate DATETIME
 DECLARE @EndDate DATETIME
-SET @StartDate = (SELECT MIN(TRY_CONVERT(datetime, left(start_at, 19))) FROM trip_ex)
-SET @EndDate = DATEADD(year, 5, (SELECT MAX(TRY_CONVERT(datetime, left(start_at, 19))) FROM trip_ex))
+SET @StartDate = (SELECT MIN(start_station_id) FROM trip_ex)
+SET @EndDate = DATEADD(year, 5, (SELECT MAX(start_station_id) FROM trip_ex))
+
+-- Create dim_time table
+CREATE EXTERNAL TABLE dim_time 
+(
+	[date] [varchar](50)  NULL,
+    [day_of_the_week] int,
+    [day_of_the_month] int,
+	[quarter] int,
+	[month] int,
+	[year] int
+)
+WITH
+(
+    LOCATION     = 'dim_time',
+    DATA_SOURCE = [file_haoptm_dfs_core_windows_net],
+    FILE_FORMAT = [SynapseDelimitedTextFormat]
+)
 
 WHILE @StartDate <= @EndDate
     BEGIN
@@ -34,6 +39,7 @@ WHILE @StartDate <= @EndDate
 
         SET @StartDate = DATEADD(day, 1, @StartDate)
     END;
+ 
 
 -- Verify the output
 SELECT TOP 10 * FROM [dbo].[dim_time];
