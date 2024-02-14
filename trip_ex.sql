@@ -17,8 +17,8 @@ GO
 CREATE EXTERNAL TABLE dbo.trip_ex (
 	[trip_id] nvarchar(4000),
 	[rideable_type] nvarchar(4000),
-	[start_at] varchar(50),
-	[ended_at] varchar(50),
+	[start_at] datetime2(0),
+	[ended_at] datetime2(0),
 	[start_station_id] nvarchar(4000),
 	[end_station_id] nvarchar(4000),
 	[rider_id] bigint
