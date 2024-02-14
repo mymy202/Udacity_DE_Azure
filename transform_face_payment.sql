@@ -1,11 +1,11 @@
-IF OBJECT_ID('dbo.dim_rider') IS NOT NULL
+IF OBJECT_ID('dbo.face_payment') IS NOT NULL
 BEGIN
-    DROP EXTERNAL TABLE dbo.dim_payment
+    DROP EXTERNAL TABLE dbo.face_payment
 END
--- Create dim_payment table
+-- Create face_payment table
 CREATE EXTERNAL TABLE [dbo].[dim_payment] WITH
 (
-    LOCATION     = 'dim_payment',
+    LOCATION     = 'face_payment',
     DATA_SOURCE = [file_haoptm_dfs_core_windows_net],
     FILE_FORMAT = [SynapseDelimitedTextFormat]
 )
@@ -18,4 +18,4 @@ SELECT
 FROM [dbo].[payment_ex];
 
 -- Verify the output
-SELECT TOP 10 * FROM dbo.dim_payment;
+SELECT TOP 10 * FROM dbo.face_payment;
