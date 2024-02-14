@@ -1,11 +1,11 @@
-IF OBJECT_ID('dbo.dim_trip') IS NOT NULL
+IF OBJECT_ID('dbo.face_trip') IS NOT NULL
 BEGIN
-    DROP TABLE dbo.dim_trip
+    DROP EXTERNAL TABLE dbo.face_trip
 END
--- Create dim_trip table
-CREATE EXTERNAL TABLE [dbo].[dim_trip] WITH
+-- Create face_trip table
+CREATE EXTERNAL TABLE [dbo].[face_trip] WITH
 (
-    LOCATION     = 'dim_trip',
+    LOCATION     = 'face_trip',
     DATA_SOURCE = [file_haoptm_dfs_core_windows_net],
     FILE_FORMAT = [SynapseDelimitedTextFormat]
 )
@@ -24,4 +24,4 @@ FROM [dbo].[trip_ex] as tr;
 JOIN [dbo].[rider_ex]  as ri ON ri.rider_id = tr.rider_id;
 
 -- Verify the output
-SELECT TOP 10 * FROM dbo.dim_trip;
+SELECT TOP 10 * FROM dbo.face_trip;
