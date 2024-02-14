@@ -11,7 +11,7 @@ CREATE EXTERNAL TABLE [dbo].[dim_payment] WITH
 )
 AS
 SELECT 
-    [payment_id] ,
+    	[payment_id] ,
 	[date] ,
 	[amount] ,
 	[rider_id] 
