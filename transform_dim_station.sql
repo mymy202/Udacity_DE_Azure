@@ -1,6 +1,6 @@
 IF OBJECT_ID('dbo.dim_station') IS NOT NULL
 BEGIN
-    DROP TABLE dbo.dim_station
+    DROP EXTERNAL TABLE dbo.dim_station
 END
 -- Create dim_rider table
 CREATE EXTERNAL TABLE [dbo].[dim_station] WITH
