@@ -20,7 +20,7 @@ SELECT
 	tr.[rider_id],
 	DATEDIFF(hour, tr.start_at, tr.ended_at) AS duration,
     	DATEDIFF(year, ri.birthday, tr.start_at) AS rider_age	
-FROM [dbo].[trip_ex] as tr;
+FROM [dbo].[trip_ex] as tr
 JOIN [dbo].[rider_ex]  as ri ON ri.rider_id = tr.rider_id;
 
 -- Verify the output
