@@ -16,9 +16,10 @@ GO
 
 CREATE EXTERNAL TABLE dbo.payment_ex (
 	[payment_id] bigint,
-	[date] varchar(50),
+	[date] datetime2(0),
 	[amount] float,
 	[rider_id] bigint
+
 	)
 	WITH (
 	LOCATION = 'payment.csv',
